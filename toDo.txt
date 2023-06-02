@@ -1,0 +1,2 @@
+1. Add job with bree to call script every 30min
+2. Send email with nodemailer when myData is updated
