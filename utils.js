@@ -10,6 +10,8 @@ const saveImage = async (imageURL) => {
   const folderName = "./images";
   if (!fs.existsSync(folderName)) {
     fs.mkdirSync(folderName);
+  } else {
+    console.log("Folder already created");
   }
   const imageName = setImageName(imageURL);
   const file = fs.createWriteStream(`./images/${imageName}`);
@@ -56,7 +58,12 @@ export const getMainNews = async (page) => {
   const mainTitleSelector = "#main-title";
   await page.waitForSelector(mainTitleSelector);
   const imageURL = await getImageURL(".news_day_img_wrap img[src]", page);
-  saveImage(imageURL[0]);
+  const imageName = setImageName(imageURL[0]);
+  if (fs.existsSync(`images/${imageName}`)) {
+    console.log("file exists");
+  } else {
+    saveImage(imageURL[0]);
+  }
   await page.click(mainTitleSelector);
   const title = await getTitle(".single-title", page);
   const body = await getMainBody(page);

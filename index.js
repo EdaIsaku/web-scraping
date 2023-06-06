@@ -1,3 +1,4 @@
+import "dotenv/config";
 import Bree from "bree";
 
 export const bree = new Bree({
@@ -5,7 +6,7 @@ export const bree = new Bree({
     {
       name: "Call Script",
       path: "./jobs/test.js",
-      interval: "every 2 seconds",
+      interval: "5m",
     },
   ],
 });

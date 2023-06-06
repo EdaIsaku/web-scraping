@@ -6,7 +6,6 @@ const site = "https://shqiptarja.com/home";
 const browser = await puppeteer.launch({ headless: false });
 
 export const start = async () => {
-  //Open browser
   const page = await browser.newPage();
   // Set screen size
   await page.setViewport({ width: 1300, height: 1024 });
@@ -14,20 +13,29 @@ export const start = async () => {
     timeout: 0,
   });
   const mainNews = await getMainNews(page);
-  fs.writeFileSync("myData.json", JSON.stringify(mainNews), (err) => {
-    if (err) {
-      throw err;
+  // Read the contents of the JSON file
+  const data = fs.readFileSync("myData.json");
+  // Parse the JSON data into a JavaScript object
+  const jsonData = JSON.parse(data);
+  // Modify the JavaScript object by adding new data
+  jsonData.length === 0 ? jsonData.push(mainNews) : "";
+  jsonData.map((el) => {
+    if (el.title !== mainNews.title) {
+      jsonData.push(mainNews);
+    } else {
+      console.log("News already added!");
     }
-    console.log("Saved!");
   });
+  const jsonString = JSON.stringify(jsonData);
+
+  fs.writeFileSync("myData.json", jsonString, "utf-8", (err) => {
+    if (err) throw err;
+    console.log("Data added to file");
+  });
+
   await page.goBack({
     waitUntil: "domcontentloaded",
   });
+  await browser.close();
   // await collectDdataFromLink(page);
 };
-
-start()
-  .catch((err) => console.log("Error", err))
-  .then(async () => {
-    await browser.close();
-  });
