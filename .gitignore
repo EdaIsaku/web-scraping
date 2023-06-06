@@ -1,6 +1,9 @@
 # Images
 images/*
 
+# Data 
+myData.json
+
 # Logs
 logs
 *.log
