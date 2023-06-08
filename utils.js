@@ -54,16 +54,20 @@ export const getImageURL = async (selector, page) => {
   return imageURL;
 };
 
-export const getMainNews = async (page) => {
-  const mainTitleSelector = "#main-title";
-  await page.waitForSelector(mainTitleSelector);
-  const imageURL = await getImageURL(".news_day_img_wrap img[src]", page);
+const checkIfFileExist = (imageURL) => {
   const imageName = setImageName(imageURL[0]);
   if (fs.existsSync(`images/${imageName}`)) {
     console.log("file exists");
   } else {
     saveImage(imageURL[0]);
   }
+};
+
+export const getMainNews = async (page) => {
+  const mainTitleSelector = "#main-title";
+  await page.waitForSelector(mainTitleSelector);
+  const imageURL = await getImageURL(".news_day_img_wrap img[src]", page);
+  checkIfFileExist(imageURL);
   await page.click(mainTitleSelector);
   const title = await getTitle(".single-title", page);
   const body = await getMainBody(page);

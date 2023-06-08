@@ -1,20 +1,20 @@
 import puppeteer from "puppeteer";
 import fs from "fs";
 import { getMainNews, collectDdataFromLink } from "./utils.js";
+import { sendMail } from "./mail.js";
 const site = "https://shqiptarja.com/home";
 
 const browser = await puppeteer.launch({ headless: false });
 
 export const start = async () => {
   const page = await browser.newPage();
-  // Set screen size
   await page.setViewport({ width: 1300, height: 1024 });
   await page.goto(site, {
     timeout: 0,
   });
   const mainNews = await getMainNews(page);
   // Read the contents of the JSON file
-  const data = fs.readFileSync("myData.json");
+  const data = fs.readFileSync("news.json");
   // Parse the JSON data into a JavaScript object
   const jsonData = JSON.parse(data);
   // Modify the JavaScript object by adding new data
@@ -28,10 +28,11 @@ export const start = async () => {
   });
   const jsonString = JSON.stringify(jsonData);
 
-  fs.writeFileSync("myData.json", jsonString, "utf-8", (err) => {
+  fs.writeFileSync("news.json", jsonString, "utf-8", (err) => {
     if (err) throw err;
     console.log("Data added to file");
   });
+  sendMail("news.json", "./news.json");
 
   await page.goBack({
     waitUntil: "domcontentloaded",

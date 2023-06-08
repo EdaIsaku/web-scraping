@@ -2,7 +2,10 @@
 images/*
 
 # Data 
-myData.json
+news.json
+
+# ToDo file
+.toDo.txt
 
 # Logs
 logs
