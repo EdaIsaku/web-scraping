@@ -1,5 +1,6 @@
 import fs from "fs";
 import https from "https";
+import { logger } from "../utils/logger.js";
 
 const setImageName = (imageURL) => {
   const truncateURL = imageURL?.split("/");
@@ -11,7 +12,7 @@ const saveImage = async (imageURL) => {
   if (!fs.existsSync(folderName)) {
     fs.mkdirSync(folderName);
   } else {
-    console.log("Folder already created");
+    logger.info("Folder already created");
   }
   const imageName = setImageName(imageURL);
   const file = fs.createWriteStream(`./images/${imageName}`);
@@ -20,12 +21,12 @@ const saveImage = async (imageURL) => {
       response.pipe(file);
       file.on("finish", () => {
         file.close();
-        console.log(`Image downloaded as ${imageName}`);
+        logger.info(`Image downloaded as ${imageName}`);
       });
     })
     .on("error", (err) => {
       fs.unlink(imageName);
-      console.error(`Error downloading image: ${err.message}`);
+      logger.error(rr.message);
     });
 };
 
@@ -57,7 +58,7 @@ export const getImageURL = async (selector, page) => {
 const checkIfFileExist = (imageURL) => {
   const imageName = setImageName(imageURL[0]);
   if (fs.existsSync(`images/${imageName}`)) {
-    console.log("file exists");
+    logger.info("File exists");
   } else {
     saveImage(imageURL[0]);
   }
@@ -112,5 +113,16 @@ export const collectDdataFromLink = async (page) => {
     await page.goBack({
       waitUntil: "domcontentloaded",
     });
+  });
+};
+
+export const savaDataInFile = (jsonData, fileName) => {
+  const jsonString = JSON.stringify(jsonData);
+  fs.writeFileSync(fileName, jsonString, "utf-8", (err) => {
+    if (err) {
+      logger.error(err);
+      throw err;
+    }
+    logger.info("Data added to file");
   });
 };

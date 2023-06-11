@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 import nodemailer from "nodemailer";
+import { logger } from "../utils/logger.js";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -15,7 +16,7 @@ export const sendMail = (filename, path) => {
     from: process.env.EMAIL,
     to: "edaisaku0@gmail.com",
     subject: "Latest News!",
-    text: "In attach you will found the latest news from shqiptarja.com",
+    text: "You will found attached latest news from shqiptarja.com",
     attachments: [
       {
         filename,
@@ -26,10 +27,9 @@ export const sendMail = (filename, path) => {
 
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
-      console.log("ERROR: ", error);
+      logger.error(error);
     } else {
-      console.log("Email sent: " + info.response);
-      // do something useful
+      logger.info(info.response);
     }
   });
 };

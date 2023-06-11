@@ -1,7 +1,8 @@
 import puppeteer from "puppeteer";
 import fs from "fs";
-import { getMainNews, collectDdataFromLink } from "./utils.js";
+import { getMainNews, collectDdataFromLink, savaDataInFile } from "./utils.js";
 import { sendMail } from "./mail.js";
+import { logger } from "../utils/logger.js";
 const site = "https://shqiptarja.com/home";
 
 const browser = await puppeteer.launch({ headless: false });
@@ -18,21 +19,27 @@ export const start = async () => {
   // Parse the JSON data into a JavaScript object
   const jsonData = JSON.parse(data);
   // Modify the JavaScript object by adding new data
-  jsonData.length === 0 ? jsonData.push(mainNews) : "";
+  if (jsonData.length === 0) {
+    jsonData.push(mainNews);
+    savaDataInFile(jsonData, "news.json");
+  }
+
+  //add news if it's new
   jsonData.map((el) => {
     if (el.title !== mainNews.title) {
       jsonData.push(mainNews);
+      savaDataInFile(jsonData, "news.json");
     } else {
-      console.log("News already added!");
+      logger.info("News already added!");
     }
   });
-  const jsonString = JSON.stringify(jsonData);
 
-  fs.writeFileSync("news.json", jsonString, "utf-8", (err) => {
-    if (err) throw err;
-    console.log("Data added to file");
-  });
   sendMail("news.json", "./news.json");
+
+  // fs.watch("./news.json", { encoding: "buffer" }, (eventType) => {
+  //   console.log("eventType", eventType);
+  //   console.log("File changed");
+  // });
 
   await page.goBack({
     waitUntil: "domcontentloaded",

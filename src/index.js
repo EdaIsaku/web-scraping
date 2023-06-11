@@ -6,7 +6,7 @@ export const bree = new Bree({
     {
       name: "Call Script",
       path: "./jobs/getNews.js",
-      interval: "15m",
+      interval: "5 m",
     },
   ],
 });
