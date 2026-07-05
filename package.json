@@ -1,7 +1,7 @@
 {
   "name": "webscraping",
   "version": "1.0.0",
-  "description": "",
+  "description": "utomated web scraping application built with Puppeteer and Node.js",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
@@ -12,7 +12,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Eda Isaku",
   "license": "ISC",
   "dependencies": {
     "bree": "^9.2.9",
@@ -23,5 +23,8 @@
     "puppeteer": "^25.3.0",
     "winston": "^3.19.0"
   },
-  "type": "module"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/webscraping.git"
+  }
 }

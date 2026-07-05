@@ -1,9 +1,11 @@
 import puppeteer from "puppeteer";
 import fs from "fs";
+import dotenv from "dotenv";
+dotenv.config();
 import { getMainNews, collectDdataFromLink, savaDataInFile } from "./utils.js";
 import { sendMail } from "./mail.js";
 import { logger } from "../utils/logger.js";
-const site = "https://shqiptarja.com/home";
+const site = process.env.NEWS_URL;
 
 const browser = await puppeteer.launch({ headless: false });
 

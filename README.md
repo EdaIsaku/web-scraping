@@ -34,15 +34,15 @@ The application runs scheduled scraping jobs using **Bree**, manages background 
 
 # 🛠️ Tech Stack
 
-| Technology | Purpose |
-|------------|---------|
-| Node.js | Runtime |
-| Puppeteer | Browser automation & Web Scraping |
-| Bree | Job Scheduler |
-| PM2 | Process Manager |
-| Nodemailer | Email Automation |
-| Winston | Logging |
-| Dotenv | Environment Variables |
+| Technology | Purpose                           |
+| ---------- | --------------------------------- |
+| Node.js    | Runtime                           |
+| Puppeteer  | Browser automation & Web Scraping |
+| Bree       | Job Scheduler                     |
+| PM2        | Process Manager                   |
+| Nodemailer | Email Automation                  |
+| Winston    | Logging                           |
+| Dotenv     | Environment Variables             |
 
 ---
 
@@ -91,12 +91,7 @@ npm install
 
 # 🌐 Environment Variables
 
-Create a `.env` file in the project root and add the following variables:
-
-```env
-EMAIL_USER=your_email@example.com
-EMAIL_PASS=your_email_password
-```
+Create a `.env` file. Copy .env.example to .env and fill in your credentials.
 
 > **Note:** Never commit your `.env` file or sensitive credentials to GitHub.
 
@@ -185,5 +180,9 @@ This project helped me gain practical experience with:
 # 👨‍💻 Author
 
 **Eda Isaku**
+
+## 📄 License
+
+This project is licensed under the MIT License.
 
 If you found this project useful, consider giving it a ⭐ on GitHub.
