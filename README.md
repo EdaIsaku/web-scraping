@@ -89,7 +89,16 @@ Install dependencies
 npm install
 ```
 
-Create a `.env` file and configure your environment variables.
+# 🌐 Environment Variables
+
+Create a `.env` file in the project root and add the following variables:
+
+```env
+EMAIL_USER=your_email@example.com
+EMAIL_PASS=your_email_password
+```
+
+> **Note:** Never commit your `.env` file or sensitive credentials to GitHub.
 
 ---
 
