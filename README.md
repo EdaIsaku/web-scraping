@@ -1,350 +1,180 @@
-# 📰 Web Scraping News Automation
+# 🕷️ Web Scraping News Automation
 
-A Node.js application that automatically scrapes the latest news from an online news portal, stores the extracted data in a JSON file, and sends the results via email. The project is scheduled to run automatically at fixed intervals using a job scheduler.
+<p align="center">
 
-## 🚀 Features
+<img src="https://img.shields.io/badge/Node.js-24.x-339933?style=for-the-badge&logo=node.js&logoColor=white"/>
+<img src="https://img.shields.io/badge/Express-Backend-000000?style=for-the-badge&logo=express"/>
+<img src="https://img.shields.io/badge/Puppeteer-Web%20Scraping-40B5A4?style=for-the-badge&logo=puppeteer&logoColor=white"/>
+<img src="https://img.shields.io/badge/Bree-Job%20Scheduler-2563EB?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/PM2-Process%20Manager-6F42C1?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/Nodemailer-Email-16A34A?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/Winston-Logging-F59E0B?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/License-MIT-orange?style=for-the-badge"/>
 
-- Scrapes the latest news article from the target website.
-- Extracts:
-  - News title
-  - Article content
-  - Featured image
+</p>
 
-- Stores data in a local JSON file.
-- Prevents duplicate news entries.
-- Automatically sends the generated JSON file via email.
-- Runs automatically every 5 minutes.
-- Includes logging for monitoring application activity.
+A lightweight **Node.js** application that automatically scrapes the latest news from an online news portal using **Puppeteer**, stores the extracted information locally, and sends the results via email.
 
-## 🛠️ Tech Stack
+The application runs scheduled scraping jobs using **Bree**, manages background execution with **PM2**, prevents duplicate entries, and logs application activity using **Winston**.
 
-- **Node.js**
-- **JavaScript (ES Modules)**
-- **Puppeteer** – Browser automation and web scraping
-- **Nodemailer** – Email delivery
-- **Bree** – Job scheduler
-- **PM2** – Process management
-- **Winston** – Logging
-- **dotenv** – Environment variable management
+---
 
-## 📁 Project Structure
+# ✨ Features
 
-```
+- ✅ Automatically scrapes the latest news article
+- ✅ Extracts article title, content and featured image
+- ✅ Stores data in a local JSON file
+- ✅ Prevents duplicate news entries
+- ✅ Sends scraped data via email
+- ✅ Scheduled background jobs
+- ✅ Application logging
+- ✅ Modular and maintainable project architecture
+
+---
+
+# 🛠️ Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| Node.js | Runtime |
+| Puppeteer | Browser automation & Web Scraping |
+| Bree | Job Scheduler |
+| PM2 | Process Manager |
+| Nodemailer | Email Automation |
+| Winston | Logging |
+| Dotenv | Environment Variables |
+
+---
+
+# 📂 Project Structure
+
+```text
 .
 ├── jobs/
 │   └── getNews.js
+│
 ├── src/
 │   ├── index.js
 │   ├── script.js
-│   ├── mail.js
-│   └── utils.js
+│   ├── utils.js
+│   └── mail.js
+│
 ├── utils/
 │   └── logger.js
+│
 ├── news.json
 ├── package.json
 └── README.md
 ```
 
-## ⚙️ Installation
+---
 
-Clone the repository:
+# ⚙️ Installation
 
-```bash
-git clone https://github.com/your-username/web-scraping.git
-```
-
-Navigate into the project:
+Clone the repository
 
 ```bash
-cd web-scraping
+git clone https://github.com/your-username/web-scraping-news.git
 ```
 
-Install dependencies:
+Navigate to the project
 
 ```bash
-npm install
+cd web-scraping-news
 ```
 
-Create a `.env` file and configure your email credentials and any required environment variables.
-
-## ▶️ Running the Application
-
-Start the application:
-
-```bash
-npm start
-```
-
-The scheduler will automatically execute the scraping job every **5 minutes**.
-
-## 📌 Workflow
-
-1. Launches a browser using Puppeteer.
-2. Navigates to the target news website.
-3. Extracts the latest article.
-4. Checks whether the article already exists.
-5. Saves new data to `news.json`.
-6. Sends the JSON file via email.
-7. Logs all important events.
-
-## 📈 Possible Improvements
-
-- Store data in a database (MongoDB or PostgreSQL).
-- Support scraping from multiple news websites.
-- Implement retry mechanisms for failed requests.
-- Run Puppeteer in headless mode in production.
-- Add unit and integration tests.
-- Dockerize the application.
-- Create a REST API to expose scraped data.
-
-## 💡 What I Learned
-
-During this project I gained practical experience with:
-
-- Browser automation using Puppeteer
-- Web scraping techniques
-- Asynchronous JavaScript (async/await)
-- Scheduled background jobs
-- Email automation with Nodemailer
-- Logging and error handling
-- Project structure and modular Node.js development
-
-## 👨‍💻 Author
-
-**Eda Isaku**
-
-If you found this project useful, feel free to give it a ⭐ on GitHub.
-
-# 📰 Web Scraping News Automation
-
-A Node.js application that automatically scrapes the latest news from an online news portal, stores the extracted data in a JSON file, and sends the results via email. The project is scheduled to run automatically at fixed intervals using a job scheduler.
-
-## 🚀 Features
-
-- Scrapes the latest news article from the target website.
-- Extracts:
-  - News title
-  - Article content
-  - Featured image
-
-- Stores data in a local JSON file.
-- Prevents duplicate news entries.
-- Automatically sends the generated JSON file via email.
-- Runs automatically every 5 minutes.
-- Includes logging for monitoring application activity.
-
-## 🛠️ Tech Stack
-
-- **Node.js**
-- **JavaScript (ES Modules)**
-- **Puppeteer** – Browser automation and web scraping
-- **Nodemailer** – Email delivery
-- **Bree** – Job scheduler
-- **PM2** – Process management
-- **Winston** – Logging
-- **dotenv** – Environment variable management
-
-## 📁 Project Structure
-
-```
-.
-├── jobs/
-│   └── getNews.js
-├── src/
-│   ├── index.js
-│   ├── script.js
-│   ├── mail.js
-│   └── utils.js
-├── utils/
-│   └── logger.js
-├── news.json
-├── package.json
-└── README.md
-```
-
-## ⚙️ Installation
-
-Clone the repository:
-
-```bash
-git clone https://github.com/your-username/web-scraping.git
-```
-
-Navigate into the project:
-
-```bash
-cd web-scraping
-```
-
-Install dependencies:
+Install dependencies
 
 ```bash
 npm install
 ```
 
-Create a `.env` file and configure your email credentials and any required environment variables.
+Create a `.env` file and configure your environment variables.
 
-## ▶️ Running the Application
+---
 
-Start the application:
+# ▶️ Running the Application
 
-```bash
-npm start
-```
-
-The scheduler will automatically execute the scraping job every **5 minutes**.
-
-## 📌 Workflow
-
-1. Launches a browser using Puppeteer.
-2. Navigates to the target news website.
-3. Extracts the latest article.
-4. Checks whether the article already exists.
-5. Saves new data to `news.json`.
-6. Sends the JSON file via email.
-7. Logs all important events.
-
-## 📈 Possible Improvements
-
-- Store data in a database (MongoDB or PostgreSQL).
-- Support scraping from multiple news websites.
-- Implement retry mechanisms for failed requests.
-- Run Puppeteer in headless mode in production.
-- Add unit and integration tests.
-- Dockerize the application.
-- Create a REST API to expose scraped data.
-
-## 💡 What I Learned
-
-During this project I gained practical experience with:
-
-- Browser automation using Puppeteer
-- Web scraping techniques
-- Asynchronous JavaScript (async/await)
-- Scheduled background jobs
-- Email automation with Nodemailer
-- Logging and error handling
-- Project structure and modular Node.js development
-
-## 👨‍💻 Author
-
-**Eda Isaku**
-
-If you found this project useful, feel free to give it a ⭐ on GitHub.
-
-# 📰 Web Scraping News Automation
-
-A Node.js application that automatically scrapes the latest news from an online news portal, stores the extracted data in a JSON file, and sends the results via email. The project is scheduled to run automatically at fixed intervals using a job scheduler.
-
-## 🚀 Features
-
-- Scrapes the latest news article from the target website.
-- Extracts:
-  - News title
-  - Article content
-  - Featured image
-
-- Stores data in a local JSON file.
-- Prevents duplicate news entries.
-- Automatically sends the generated JSON file via email.
-- Runs automatically every 5 minutes.
-- Includes logging for monitoring application activity.
-
-## 🛠️ Tech Stack
-
-- **Node.js**
-- **JavaScript (ES Modules)**
-- **Puppeteer** – Browser automation and web scraping
-- **Nodemailer** – Email delivery
-- **Bree** – Job scheduler
-- **PM2** – Process management
-- **Winston** – Logging
-- **dotenv** – Environment variable management
-
-## 📁 Project Structure
-
-```
-.
-├── jobs/
-│   └── getNews.js
-├── src/
-│   ├── index.js
-│   ├── script.js
-│   ├── mail.js
-│   └── utils.js
-├── utils/
-│   └── logger.js
-├── news.json
-├── package.json
-└── README.md
-```
-
-## ⚙️ Installation
-
-Clone the repository:
-
-```bash
-git clone https://github.com/your-username/web-scraping.git
-```
-
-Navigate into the project:
-
-```bash
-cd web-scraping
-```
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Create a `.env` file and configure your email credentials and any required environment variables.
-
-## ▶️ Running the Application
-
-Start the application:
+Run normally
 
 ```bash
 npm start
 ```
 
-The scheduler will automatically execute the scraping job every **5 minutes**.
+Run with PM2
 
-## 📌 Workflow
+```bash
+npm run pm2
+```
 
-1. Launches a browser using Puppeteer.
-2. Navigates to the target news website.
-3. Extracts the latest article.
-4. Checks whether the article already exists.
-5. Saves new data to `news.json`.
-6. Sends the JSON file via email.
-7. Logs all important events.
+View logs
 
-## 📈 Possible Improvements
+```bash
+npm run logs
+```
 
-- Store data in a database (MongoDB or PostgreSQL).
-- Support scraping from multiple news websites.
-- Implement retry mechanisms for failed requests.
-- Run Puppeteer in headless mode in production.
-- Add unit and integration tests.
-- Dockerize the application.
-- Create a REST API to expose scraped data.
+---
 
-## 💡 What I Learned
+# 🔄 Workflow
 
-During this project I gained practical experience with:
+```text
+Scheduler (Bree)
+        │
+        ▼
+Start Job
+        │
+        ▼
+Launch Puppeteer
+        │
+        ▼
+Open News Website
+        │
+        ▼
+Extract Latest Article
+        │
+        ▼
+Check for Duplicates
+        │
+        ▼
+Save JSON File
+        │
+        ▼
+Send Email
+        │
+        ▼
+Write Logs
+```
 
-- Browser automation using Puppeteer
-- Web scraping techniques
-- Asynchronous JavaScript (async/await)
-- Scheduled background jobs
-- Email automation with Nodemailer
-- Logging and error handling
-- Project structure and modular Node.js development
+---
 
-## 👨‍💻 Author
+# 🚀 Future Improvements
+
+- MongoDB/PostgreSQL integration
+- Multi-source news scraping
+- REST API
+- Docker support
+- Unit & Integration Tests
+- CI/CD with GitHub Actions
+
+---
+
+# 📖 What I Learned
+
+This project helped me gain practical experience with:
+
+- Web Scraping using Puppeteer
+- Browser Automation
+- Asynchronous JavaScript
+- Scheduled Background Jobs
+- Email Automation
+- Logging & Error Handling
+- Modular Node.js Architecture
+- Process Management with PM2
+
+---
+
+# 👨‍💻 Author
 
 **Eda Isaku**
 
-If you found this project useful, feel free to give it a ⭐ on GitHub.
+If you found this project useful, consider giving it a ⭐ on GitHub.
